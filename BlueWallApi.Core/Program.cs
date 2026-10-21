@@ -1,3 +1,6 @@
+using BlueWallApi.Core.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Ajouter les services au conteneur d'injection de dependances
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // 2. Configurer la documentation Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<BlueWallDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

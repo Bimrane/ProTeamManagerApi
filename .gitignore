@@ -16,3 +16,8 @@ desktop.ini
 # Fichiers de configuration locaux et secrets
 appsettings.Development.json
 secrets.json
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
