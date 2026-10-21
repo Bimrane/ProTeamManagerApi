@@ -1,0 +1,18 @@
+# Fichiers générés par .NET
+**/bin/
+**/obj/
+
+# Fichiers temporaires de Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Fichiers du système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Fichiers de configuration locaux et secrets
+appsettings.Development.json
+secrets.json
