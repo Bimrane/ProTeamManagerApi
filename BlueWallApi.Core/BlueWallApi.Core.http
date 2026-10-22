@@ -1,6 +1,0 @@
-@BlueWallApi.Core_HostAddress = http://localhost:5210
-
-GET {{BlueWallApi.Core_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
