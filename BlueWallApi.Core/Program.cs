@@ -1,5 +1,10 @@
 using BlueWallApi.Core.Data;
 using Microsoft.EntityFrameworkCore;
+using BlueWallApi.Core.Repositories;
+using BlueWallApi.Core.Services;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using BlueWallApi.Core.Errors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +18,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BlueWallDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+builder.Services.AddScoped<ITeamService, TeamService>();
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 // 3. Configurer le pipeline HTTP
@@ -21,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

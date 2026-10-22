@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueWallApi.Core", "BlueWallApi.Core\BlueWallApi.Core.csproj", "{F12CFFE8-2571-47D2-8097-80F1C81ED778}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueWallApi.Tests", "BlueWallApi.Tests\BlueWallApi.Tests.csproj", "{D0AC5951-C36F-48F9-B093-D06B22DA89FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{F12CFFE8-2571-47D2-8097-80F1C81ED778}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F12CFFE8-2571-47D2-8097-80F1C81ED778}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F12CFFE8-2571-47D2-8097-80F1C81ED778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0AC5951-C36F-48F9-B093-D06B22DA89FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0AC5951-C36F-48F9-B093-D06B22DA89FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0AC5951-C36F-48F9-B093-D06B22DA89FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0AC5951-C36F-48F9-B093-D06B22DA89FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
