@@ -21,7 +21,6 @@ public class TeamsController : ControllerBase
     {
         var teams = await _teamService.GetAllTeamsAsync();
         
-        // Mapping manuel ou via AutoMapper (ici manuel pour la simplicité pédagogique)
         var response = teams.Select(t => new TeamResponseDto(
             t.Id,
             t.Name,
@@ -56,8 +55,6 @@ public class TeamsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<TeamResponseDto>> CreateTeam([FromBody] CreateTeamDto createTeamDto)
     {
-        // Grâce à [ApiController] et FluentValidation, si le DTO est invalide, 
-        // ASP.NET Core retourne automatiquement un HTTP 400 Bad Request.
 
         var createdTeam = await _teamService.CreateTeamAsync(createTeamDto.Name, createTeamDto.Game);
 
