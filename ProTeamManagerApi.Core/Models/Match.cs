@@ -7,7 +7,7 @@ public class Match
     public string Tournament { get; set; } = string.Empty;
     public DateTime MatchDate { get; set; }
     public bool IsWon { get; set; }
-    
+
     // Clé étrangère et navigation vers l'équipe
     public int TeamId { get; set; }
     public Team? Team { get; set; }

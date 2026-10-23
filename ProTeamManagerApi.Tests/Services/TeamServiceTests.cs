@@ -34,7 +34,7 @@ public class TeamServiceTests
         result.Id.Should().Be(1);
         result.Name.Should().Be(teamName);
         result.Game.Should().Be(game);
-        
+
         _teamRepositoryMock.Verify(r => r.AddAsync(It.IsAny<Team>()), Times.Once);
     }
 
@@ -64,7 +64,7 @@ public class TeamServiceTests
             Times.Once);
     }
 
-    
+
     [Fact]
     public async Task GetTeamDetailsAsync_Should_ReturnNull_WhenTeamDoesNotExist()
     {

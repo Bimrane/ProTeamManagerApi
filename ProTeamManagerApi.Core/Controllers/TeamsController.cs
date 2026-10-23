@@ -1,7 +1,7 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using ProTeamManagerApi.Core.DTOs;
 using ProTeamManagerApi.Core.Services;
-using FluentValidation;
 
 namespace ProTeamManagerApi.Core.Controllers;
 
@@ -24,7 +24,7 @@ public class TeamsController : ControllerBase
     public async Task<ActionResult<IEnumerable<TeamResponseDto>>> GetAllTeams()
     {
         var teams = await _teamService.GetAllTeamsAsync();
-        
+
         var response = teams.Select(t => new TeamResponseDto(
             t.Id,
             t.Name,
@@ -32,7 +32,7 @@ public class TeamsController : ControllerBase
             t.Players.Count
         ));
 
-        return Ok(response); 
+        return Ok(response);
     }
 
     // GET: api/teams/{id}
@@ -43,16 +43,16 @@ public class TeamsController : ControllerBase
 
         if (team == null)
         {
-            return NotFound(new ProblemDetails 
-                { 
-                    Title = "Ressource introuvable", 
-                    Detail = $"L'équipe avec l'ID {id} est introuvable.",
-                    Status = StatusCodes.Status404NotFound
-                });
+            return NotFound(new ProblemDetails
+            {
+                Title = "Ressource introuvable",
+                Detail = $"L'équipe avec l'ID {id} est introuvable.",
+                Status = StatusCodes.Status404NotFound
+            });
         }
 
         var response = new TeamResponseDto(team.Id, team.Name, team.Game, team.Players.Count);
-        return Ok(response); 
+        return Ok(response);
     }
 
     // POST: api/teams

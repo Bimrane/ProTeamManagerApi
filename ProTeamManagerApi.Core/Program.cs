@@ -1,10 +1,9 @@
-using ProTeamManagerApi.Core.Data;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using ProTeamManagerApi.Core.Data;
+using ProTeamManagerApi.Core.Errors;
 using ProTeamManagerApi.Core.Repositories;
 using ProTeamManagerApi.Core.Services;
-using FluentValidation;
-using ProTeamManagerApi.Core.Errors;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
