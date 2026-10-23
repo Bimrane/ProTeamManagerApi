@@ -17,7 +17,6 @@ public class TeamRepository : ITeamRepository
     {
         return await _context.Teams
             .Include(t => t.Players)
-            .Include(t => t.Matches)
             .ToListAsync();
     }
 

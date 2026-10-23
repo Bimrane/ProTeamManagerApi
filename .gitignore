@@ -21,3 +21,19 @@ secrets.json
 *.db
 *.db-shm
 *.db-wal
+
+# Résultats de tests / couverture
+TestResults/
+coverage*/
+*.trx
+
+# Publication et packages
+publish/
+*.nupkg
+
+# Logs et variables d'environnement
+*.log
+.env
+
+# Autres IDE
+.idea/
