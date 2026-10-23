@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProTeamManagerApi.Core.DTOs;
 using ProTeamManagerApi.Core.Services;
+using FluentValidation;
 
 namespace ProTeamManagerApi.Core.Controllers;
 
@@ -10,9 +11,12 @@ public class TeamsController : ControllerBase
 {
     private readonly ITeamService _teamService;
 
-    public TeamsController(ITeamService teamService)
+    private readonly IValidator<CreateTeamDto> _validator;
+
+    public TeamsController(ITeamService teamService, IValidator<CreateTeamDto> validator)
     {
         _teamService = teamService;
+        _validator = validator;
     }
 
     // GET: api/teams
@@ -55,11 +59,32 @@ public class TeamsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<TeamResponseDto>> CreateTeam([FromBody] CreateTeamDto createTeamDto)
     {
+        var validation = await _validator.ValidateAsync(createTeamDto);
 
-        var createdTeam = await _teamService.CreateTeamAsync(createTeamDto.Name, createTeamDto.Game);
+        if (!validation.IsValid)
+        {
+            var errors = validation.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.Select(e => e.ErrorMessage).ToArray());
 
-        var response = new TeamResponseDto(createdTeam.Id, createdTeam.Name, createdTeam.Game, 0);
+            return ValidationProblem(new ValidationProblemDetails(errors));
+        }
 
-        return CreatedAtAction(nameof(GetTeamById), new { id = createdTeam.Id }, response);
+        var createdTeam = await _teamService.CreateTeamAsync(
+            createTeamDto.Name,
+            createTeamDto.Game);
+
+        var response = new TeamResponseDto(
+            createdTeam.Id,
+            createdTeam.Name,
+            createdTeam.Game,
+            0);
+
+        return CreatedAtAction(
+            nameof(GetTeamById),
+            new { id = createdTeam.Id },
+            response);
     }
 }
