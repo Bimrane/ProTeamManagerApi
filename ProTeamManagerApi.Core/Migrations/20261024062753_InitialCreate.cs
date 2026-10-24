@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -54,7 +54,7 @@ namespace ProTeamManagerApi.Core.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Pseudo = table.Column<string>(type: "TEXT", nullable: false),
+                    Nickname = table.Column<string>(type: "TEXT", nullable: false),
                     Role = table.Column<string>(type: "TEXT", nullable: false),
                     TeamId = table.Column<int>(type: "INTEGER", nullable: false)
                 },

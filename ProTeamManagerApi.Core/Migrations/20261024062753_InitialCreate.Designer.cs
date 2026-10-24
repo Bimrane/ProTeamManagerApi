@@ -11,14 +11,14 @@ using ProTeamManagerApi.Core.Data;
 namespace ProTeamManagerApi.Core.Migrations
 {
     [DbContext(typeof(ProTeamManagerDbContext))]
-    [Migration("20261022102636_InitialCreate")]
+    [Migration("20261024062753_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.32");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.13");
 
             modelBuilder.Entity("ProTeamManagerApi.Core.Models.Match", b =>
                 {
@@ -56,7 +56,7 @@ namespace ProTeamManagerApi.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Pseudo")
+                    b.Property<string>("Nickname")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

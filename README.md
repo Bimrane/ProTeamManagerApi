@@ -1,6 +1,6 @@
 # ProTeamManagerApi
 
-API REST développée avec ASP.NET Core et .NET 8 pour gérer des équipes de jeux vidéo.
+API REST développée avec ASP.NET Core et .NET 10 pour gérer des équipes de jeux vidéo.
 
 ## Fonctionnalités
 
@@ -14,8 +14,8 @@ API REST développée avec ASP.NET Core et .NET 8 pour gérer des équipes de je
 
 ## Technologies
 
-- C# et ASP.NET Core 8
-- Entity Framework Core
+- C# et ASP.NET Core 10
+- Entity Framework Core 10
 - SQLite
 - FluentValidation
 - Swagger / OpenAPI
@@ -23,7 +23,7 @@ API REST développée avec ASP.NET Core et .NET 8 pour gérer des équipes de je
 
 ## Prérequis
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
 - Git
 
 ## Installation
@@ -31,20 +31,20 @@ API REST développée avec ASP.NET Core et .NET 8 pour gérer des équipes de je
 Cloner le dépôt :
 
 ```bash
-git clone https://github.com/Bimrane/ProTeamManagerApi.git;
-cd ProTeamManagerApi-master;
+git clone https://github.com/Bimrane/ProTeamManagerApi.git
+cd ProTeamManagerApi
 ```
 
 Restaurer les dépendances :
 
 ```bash
-dotnet restore .\ProTeamManagerApi.sln
+dotnet restore ./ProTeamManagerApi.sln
 ```
 
 ## Lancer l'API
 
 ```bash
-dotnet run --project .\ProTeamManagerApi.Core\ProTeamManagerApi.Core.csproj
+dotnet run --project ./ProTeamManagerApi.Core/ProTeamManagerApi.Core.csproj
 ```
 
 Au démarrage, les migrations Entity Framework Core en attente sont appliquées automatiquement.
@@ -61,19 +61,24 @@ Swagger permet de consulter les routes et de tester les requêtes HTTP.
 
 ## Routes disponibles
 
-| Méthode | Route             | Description                              |
-| GET     | `/api/teams`      | Récupérer toutes les équipes             |
-| GET     | `/api/teams/{id}` | Récupérer une équipe par son identifiant |
-| POST    | `/api/teams`      | Créer une équipe                         |
+| Méthode | Route | Description |
+|---|---|---|
+| GET | `/api/teams` | Récupérer toutes les équipes |
+| GET | `/api/teams/{id}` | Récupérer une équipe par son identifiant |
+| POST | `/api/teams` | Créer une équipe |
 
 ### Exemple de création d'équipe
 
-Requête `POST /api/teams` :
+Requête `POST /api/teams` avec le corps JSON suivant :
 
+```json
 {
   "name": "Mon équipe",
   "game": "League of Legends"
 }
+```
+
+Réponses possibles :
 
 - `201 Created` : équipe créée.
 - `400 Bad Request` : données invalides.
@@ -84,7 +89,8 @@ Requête `POST /api/teams` :
 Lancer les tests :
 
 ```bash
-dotnet test .\ProTeamManagerApi.sln
+dotnet test ./ProTeamManagerApi.sln
+```
 
 ## Structure du projet
 
