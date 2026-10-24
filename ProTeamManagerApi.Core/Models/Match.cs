@@ -6,9 +6,12 @@ public class Match
     public string Opponent { get; set; } = string.Empty;
     public string Tournament { get; set; } = string.Empty;
     public DateTime MatchDate { get; set; }
-    public bool IsWon { get; set; }
+    
+    public int TeamScore { get; set; }
+    public int OpponentScore { get; set; }
+    
+    public bool IsWon => TeamScore > OpponentScore;
 
-    // Clé étrangère et navigation vers l'équipe
     public int TeamId { get; set; }
     public Team? Team { get; set; }
 }

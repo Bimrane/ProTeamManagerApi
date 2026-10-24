@@ -23,9 +23,6 @@ namespace ProTeamManagerApi.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsWon")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("MatchDate")
                         .HasColumnType("TEXT");
 
@@ -33,7 +30,13 @@ namespace ProTeamManagerApi.Core.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("OpponentScore")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("TeamId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TeamScore")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Tournament")
