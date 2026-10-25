@@ -18,13 +18,10 @@ public class TeamsIntegrationTests : IClassFixture<CustomWebApplicationFactory>
     [Fact]
     public async Task PostTeam_ShouldReturnCreated_WhenDataIsValid()
     {
-        // Arrange
         var newTeam = new CreateTeamDto("Karmine Corp", "League of Legends");
 
-        // Act
         var response = await _client.PostAsJsonAsync("/api/teams", newTeam);
 
-        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Created);
         
         var createdTeam = await response.Content.ReadFromJsonAsync<TeamResponseDto>();
@@ -36,13 +33,10 @@ public class TeamsIntegrationTests : IClassFixture<CustomWebApplicationFactory>
     [Fact]
     public async Task PostTeam_ShouldReturnBadRequest_WhenNameIsEmpty()
     {
-        // Arrange (Nom vide pour déclencher FluentValidation)
         var invalidTeam = new CreateTeamDto("", "League of Legends");
 
-        // Act
         var response = await _client.PostAsJsonAsync("/api/teams", invalidTeam);
 
-        // Assert -> Doit retourner 400 Bad Request grâce à notre auto-validation
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
 }

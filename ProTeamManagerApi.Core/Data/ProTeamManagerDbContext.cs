@@ -17,7 +17,6 @@ public class ProTeamManagerDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Configuration de la relation Team -> Players (Cascade delete)
         modelBuilder.Entity<Team>()
             .HasMany(t => t.Players)
             .WithOne(p => p.Team)

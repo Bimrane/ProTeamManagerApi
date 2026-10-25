@@ -19,7 +19,6 @@ public class TeamsController : ControllerBase
         _validator = validator;
     }
 
-    // GET: api/teams
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TeamResponseDto>>> GetAllTeams()
     {
@@ -35,7 +34,6 @@ public class TeamsController : ControllerBase
         return Ok(response);
     }
 
-    // GET: api/teams/{id}
     [HttpGet("{id:int}")]
     public async Task<ActionResult<TeamResponseDto>> GetTeamById(int id)
     {
@@ -55,7 +53,6 @@ public class TeamsController : ControllerBase
         return Ok(response);
     }
 
-    // POST: api/teams
     [HttpPost]
     public async Task<ActionResult<TeamResponseDto>> CreateTeam([FromBody] CreateTeamDto createTeamDto)
     {

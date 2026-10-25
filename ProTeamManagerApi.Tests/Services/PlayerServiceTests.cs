@@ -23,14 +23,11 @@ public class PlayerServiceTests
     [Fact]
     public async Task CreatePlayerAsync_Should_ThrowKeyNotFoundException_WhenTeamDoesNotExist()
     {
-        // Arrange
         int invalidTeamId = 99;
         _teamRepoMock.Setup(r => r.GetByIdAsync(invalidTeamId)).ReturnsAsync((Team?)null);
 
-        // Act
         Func<Task> act = async () => await _playerService.CreatePlayerAsync("Canna", "Toplaner", invalidTeamId);
 
-        // Assert
         await act.Should().ThrowAsync<KeyNotFoundException>()
             .WithMessage($"L'équipe avec l'ID {invalidTeamId} est introuvable.");
     }

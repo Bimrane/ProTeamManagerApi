@@ -13,7 +13,6 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
     public CustomWebApplicationFactory()
     {
-        // Crée une base SQLite en mémoire persistante pour la durée des tests
         _connection = new SqliteConnection("DataSource=:memory:");
         _connection.Open();
     }
@@ -24,7 +23,6 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         
         builder.ConfigureServices(services =>
         {
-            // Supprime l'enregistrement réel du DbContext (SQLite fichier)
             var descriptor = services.SingleOrDefault(
                 d => d.ServiceType == typeof(DbContextOptions<ProTeamManagerDbContext>));
 
@@ -33,13 +31,11 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 services.Remove(descriptor);
             }
 
-            // Remplace par la base SQLite en mémoire de test
             services.AddDbContext<ProTeamManagerDbContext>(options =>
             {
                 options.UseSqlite(_connection);
             });
 
-            // Crée le schéma de la base de données pour les tests
             var sp = services.BuildServiceProvider();
             using var scope = sp.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<ProTeamManagerDbContext>();
