@@ -101,4 +101,22 @@ public class MatchesController : ControllerBase
             });
         }
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateMatch(int id, UpdateMatchDto updateDto)
+    {
+        var success = await _matchService.UpdateMatchAsync(id, updateDto);
+        if (!success) return NotFound("Match not found or team does not exist.");
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteMatch(int id)
+    {
+        var success = await _matchService.DeleteMatchAsync(id);
+        if (!success) return NotFound();
+
+        return NoContent();
+    }
 }

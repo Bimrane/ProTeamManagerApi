@@ -1,5 +1,6 @@
 using ProTeamManagerApi.Core.Models;
 using ProTeamManagerApi.Core.Repositories;
+using ProTeamManagerApi.Core.DTOs;
 
 namespace ProTeamManagerApi.Core.Services;
 
@@ -31,5 +32,26 @@ public class TeamService : ITeamService
         };
 
         return await _teamRepository.AddAsync(team);
+    }
+
+    public async Task<bool> UpdateTeamAsync(int id, UpdateTeamDto updateDto)
+    {
+        var team = await _teamRepository.GetByIdAsync(id);
+        if (team == null) return false;
+
+        team.Name = updateDto.Name;
+        team.Game = updateDto.Game;
+
+        await _teamRepository.UpdateAsync(team);
+        return true;
+    }
+
+    public async Task<bool> DeleteTeamAsync(int id)
+    {
+        var team = await _teamRepository.GetByIdAsync(id);
+        if (team == null) return false;
+
+        await _teamRepository.DeleteAsync(team);
+        return true;
     }
 }

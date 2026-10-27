@@ -86,4 +86,22 @@ public class PlayersController : ControllerBase
             });
         }
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdatePlayer(int id, UpdatePlayerDto updateDto)
+    {
+        var success = await _playerService.UpdatePlayerAsync(id, updateDto);
+        if (!success) return NotFound("Player not found or target team does not exist.");
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletePlayer(int id)
+    {
+        var success = await _playerService.DeletePlayerAsync(id);
+        if (!success) return NotFound();
+
+        return NoContent();
+    }
 }

@@ -39,4 +39,21 @@ public class TeamRepository : ITeamRepository
     {
         await _context.SaveChangesAsync();
     }
+
+    public async Task UpdateAsync(Team team)
+    {
+        _context.Teams.Update(team);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(Team team)
+    {
+        _context.Teams.Remove(team);
+        await _context.SaveChangesAsync();
+    }
+    
+    public async Task<bool> ExistsAsync(int id)
+    {
+        return await _context.Teams.AnyAsync(t => t.Id == id);
+    }
 }

@@ -33,4 +33,16 @@ public class PlayerRepository : IPlayerRepository
         await _context.SaveChangesAsync();
         return player;
     }
+
+    public async Task UpdateAsync(Player player)
+    {
+        _context.Players.Update(player);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(Player player)
+    {
+        _context.Players.Remove(player);
+        await _context.SaveChangesAsync();
+    }
 }

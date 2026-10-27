@@ -1,5 +1,6 @@
 using ProTeamManagerApi.Core.Models;
 using ProTeamManagerApi.Core.Repositories;
+using ProTeamManagerApi.Core.DTOs;
 
 namespace ProTeamManagerApi.Core.Services;
 
@@ -43,5 +44,33 @@ public class MatchService : IMatchService
         };
 
         return await _matchRepository.AddAsync(match);
+    }
+
+    public async Task<bool> UpdateMatchAsync(int id, UpdateMatchDto updateDto)
+    {
+        var match = await _matchRepository.GetByIdAsync(id);
+        if (match == null) return false;
+
+        var teamExists = await _teamRepository.ExistsAsync(updateDto.TeamId);
+        if (!teamExists) return false;
+
+        match.Opponent = updateDto.Opponent;
+        match.Tournament = updateDto.Tournament;
+        match.MatchDate = updateDto.MatchDate;
+        match.TeamScore = updateDto.TeamScore;
+        match.OpponentScore = updateDto.OpponentScore;
+        match.TeamId = updateDto.TeamId;
+
+        await _matchRepository.UpdateAsync(match);
+        return true;
+    }
+
+    public async Task<bool> DeleteMatchAsync(int id)
+    {
+        var match = await _matchRepository.GetByIdAsync(id);
+        if (match == null) return false;
+
+        await _matchRepository.DeleteAsync(match);
+        return true;
     }
 }

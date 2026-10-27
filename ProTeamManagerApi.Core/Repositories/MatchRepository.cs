@@ -33,4 +33,16 @@ public class MatchRepository : IMatchRepository
         await _context.SaveChangesAsync();
         return match;
     }
+
+    public async Task UpdateAsync(Match match)
+    {
+        _context.Matches.Update(match);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(Match match)
+    {
+        _context.Matches.Remove(match);
+        await _context.SaveChangesAsync();
+    }
 }

@@ -1,5 +1,6 @@
 using ProTeamManagerApi.Core.Models;
 using ProTeamManagerApi.Core.Repositories;
+using ProTeamManagerApi.Core.DTOs;
 
 namespace ProTeamManagerApi.Core.Services;
 
@@ -40,5 +41,30 @@ public class PlayerService : IPlayerService
         };
 
         return await _playerRepository.AddAsync(player);
+    }
+
+    public async Task<bool> UpdatePlayerAsync(int id, UpdatePlayerDto updateDto)
+    {
+        var player = await _playerRepository.GetByIdAsync(id);
+        if (player == null) return false;
+
+        var teamExists = await _teamRepository.ExistsAsync(updateDto.TeamId);
+        if (!teamExists) return false;
+
+        player.Nickname = updateDto.Nickname;
+        player.Role = updateDto.Role;
+        player.TeamId = updateDto.TeamId;
+
+        await _playerRepository.UpdateAsync(player);
+        return true;
+    }
+
+    public async Task<bool> DeletePlayerAsync(int id)
+    {
+        var player = await _playerRepository.GetByIdAsync(id);
+        if (player == null) return false;
+
+        await _playerRepository.DeleteAsync(player);
+        return true;
     }
 }

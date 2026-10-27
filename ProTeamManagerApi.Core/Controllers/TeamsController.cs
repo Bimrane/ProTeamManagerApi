@@ -84,4 +84,22 @@ public class TeamsController : ControllerBase
             new { id = createdTeam.Id },
             response);
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateTeam(int id, UpdateTeamDto updateDto)
+    {
+        var success = await _teamService.UpdateTeamAsync(id, updateDto);
+        if (!success) return NotFound();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTeam(int id)
+    {
+        var success = await _teamService.DeleteTeamAsync(id);
+        if (!success) return NotFound();
+
+        return NoContent();
+    }
 }
