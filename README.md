@@ -4,13 +4,13 @@ API REST développée avec ASP.NET Core et .NET 10 pour gérer des équipes de j
 
 ## Fonctionnalités
 
-- Consulter la liste des équipes.
-- Consulter les détails d'une équipe.
-- Créer une équipe.
-- Valider les données reçues avec FluentValidation.
-- Gérer les erreurs avec des réponses HTTP structurées.
-- Stocker les données dans une base SQLite.
-- Documenter et tester l'API avec Swagger.
+- **CRUD complet** pour les équipes, les joueurs et les matchs.
+- Gestion des relations (un-à-plusieurs) entre les équipes, leurs joueurs et leurs matchs.
+- Validation automatique des données entrantes avec FluentValidation.
+- Gestion globale des erreurs avec des réponses HTTP structurées (`ProblemDetails`).
+- Stockage persistant avec SQLite (approche Code-First et Migrations EF Core).
+- Tests automatisés (unitaires avec Moq et d'intégration avec `WebApplicationFactory`).
+- Documentation interactive via Swagger / OpenAPI.
 
 ## Technologies
 
@@ -63,9 +63,24 @@ Swagger permet de consulter les routes et de tester les requêtes HTTP.
 
 | Méthode | Route | Description |
 |---|---|---|
+| **Équipes** | | |
 | GET | `/api/teams` | Récupérer toutes les équipes |
 | GET | `/api/teams/{id}` | Récupérer une équipe par son identifiant |
 | POST | `/api/teams` | Créer une équipe |
+| PUT | `/api/teams/{id}` | Mettre à jour une équipe |
+| DELETE | `/api/teams/{id}` | Supprimer une équipe |
+| **Joueurs** | | |
+| GET | `/api/players` | Récupérer tous les joueurs |
+| GET | `/api/players/{id}` | Récupérer un joueur par son identifiant |
+| POST | `/api/players` | Créer un joueur |
+| PUT | `/api/players/{id}` | Mettre à jour un joueur |
+| DELETE | `/api/players/{id}` | Supprimer un joueur |
+| **Matchs** | | |
+| GET | `/api/matches` | Récupérer tous les matchs |
+| GET | `/api/matches/{id}` | Récupérer un match par son identifiant |
+| POST | `/api/matches` | Créer un match |
+| PUT | `/api/matches/{id}` | Mettre à jour un match |
+| DELETE | `/api/matches/{id}` | Supprimer un match |
 
 ### Exemple de création d'équipe
 
