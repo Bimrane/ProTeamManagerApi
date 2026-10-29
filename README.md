@@ -55,7 +55,7 @@ La base de données SQLite est configurée dans `ProTeamManagerApi.Core/appsetti
 
 Une fois l'API lancée en environnement de développement, ouvre l'URL Swagger affichée dans le terminal, généralement :
 
-`https://localhost:<PORT>/swagger`
+`https://localhost:5210/swagger`
 
 Swagger permet de consulter les routes et de tester les requêtes HTTP.
 
