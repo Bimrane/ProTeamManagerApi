@@ -39,4 +39,19 @@ public class TeamsIntegrationTests : IClassFixture<CustomWebApplicationFactory>
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
+
+    [Fact]
+    async Task DeleteTeam_ShouldReturnNoContent_AndRemoveTeam()
+    {
+        var newTeam = new CreateTeamDto("Team to Delete", "Valorant");
+        var createResponse = await _client.PostAsJsonAsync("/api/teams", newTeam);
+        var createdTeam = await createResponse.Content.ReadFromJsonAsync<TeamResponseDto>();
+
+        var deleteResponse = await _client.DeleteAsync($"/api/teams/{createdTeam!.Id}");
+
+        deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
+
+        var getResponse = await _client.GetAsync($"/api/teams/{createdTeam.Id}");
+        getResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
 }

@@ -3,6 +3,7 @@ using Moq;
 using ProTeamManagerApi.Core.Models;
 using ProTeamManagerApi.Core.Repositories;
 using ProTeamManagerApi.Core.Services;
+using ProTeamManagerApi.Core.DTOs;
 using Xunit;
 
 namespace ProTeamManagerApi.Tests.Services;
@@ -79,5 +80,38 @@ public class TeamServiceTests
         _teamRepositoryMock.Verify(
             r => r.GetByIdAsync(999),
             Times.Once);
+    }
+
+    [Fact]
+    public async Task UpdateTeamAsync_ShouldReturnTrue_WhenTeamExists()
+    {
+        // Arrange
+        var teamId = 1;
+        var existingTeam = new Team { Id = teamId, Name = "Old Name", Game = "CS2" };
+        var updateDto = new UpdateTeamDto("New Name", "CS2");
+
+        _teamRepositoryMock.Setup(repo => repo.GetByIdAsync(teamId)).ReturnsAsync(existingTeam);
+        _teamRepositoryMock.Setup(repo => repo.UpdateAsync(It.IsAny<Team>())).Returns(Task.CompletedTask);
+
+        // Act
+        var result = await _teamService.UpdateTeamAsync(teamId, updateDto);
+
+        // Assert
+        result.Should().BeTrue();
+        existingTeam.Name.Should().Be("New Name"); // Vérifie que les données ont bien été modifiées
+    }
+
+    [Fact]
+    public async Task DeleteTeamAsync_ShouldReturnFalse_WhenTeamDoesNotExist()
+    {
+        // Arrange
+        var teamId = 99;
+        _teamRepositoryMock.Setup(repo => repo.GetByIdAsync(teamId)).ReturnsAsync((Team?)null);
+
+        // Act
+        var result = await _teamService.DeleteTeamAsync(teamId);
+
+        // Assert
+        result.Should().BeFalse(); // Doit échouer car l'équipe n'existe pas
     }
 }
